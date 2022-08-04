@@ -26,6 +26,6 @@ class TestForCreateCourier:
     ]
 
     @pytest.mark.parametrize("payload,expected_status_code", test_data)
-    def test_check_for_login(self, payload, expected_status_code):
-        response = requests.post(Links.CREATE_COURIER_FULL_URL, json=payload)
+    def test_check_for_login(self, payload, expected_status_code, server_address, delete_courier):
+        response = requests.post(''.join([server_address, Links.CREATE_COURIER_ENDPOINT]), json=payload)
         assert response.status_code == expected_status_code

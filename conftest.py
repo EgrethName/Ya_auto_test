@@ -1,30 +1,30 @@
 import pytest
 import requests
-import psycopg2
+
 from data import Links, Payloads
 
 
-# def connect_to_database():
-#     con = psycopg2.connect(
-#         database="scooter_rent",
-#         user="20e1031b-5f44-4950-b4d6-d9a8b82d91a4",
-#         password="smith",
-#         host="serverhub.praktikum-services.ru",
-#         port="4554"
-#     )
-#     print("Database opened successfully")
+def pytest_addoption(parser):   #  парсер аргументов из консоли
+    parser.addoption("--server_address", action="store")
 
-@pytest.fixture(autouse=true)
-def setup_url():
-    pass
+
+@pytest.fixture(scope="session")
+def server_address(request):
+    return request.config.getoption("--server_address")
 
 
 @pytest.fixture(scope='class')
-def get_track_number():
-    response = requests.post(''.join([Links.SERVER_URL, Links.CREATE_ORDER_ENDPOINT]), json=Payloads.PAYLOAD_FOR_ORDER)
+def get_track_number(server_address):
+    response = requests.post(''.join([server_address, Links.CREATE_ORDER_ENDPOINT]), json=Payloads.PAYLOAD_FOR_ORDER)
     response_json = response.json()
     track_number = response_json['track']
     return track_number
 
-#
-# connect_to_database()
+
+@pytest.fixture(scope='session')
+def delete_courier(server_address):
+    yield
+    for i in range(1, 50):
+        response = requests.delete(''.join([server_address, Links.DELETE_COURIER_ENDPOINT, str(i)]))
+    print('All couriers delete from db')
+

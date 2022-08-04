@@ -9,15 +9,12 @@ def generate_random_string(string_length):
 
 class Links:
 
-    SERVER_URL = 'https://20e1031b-5f44-4950-b4d6-d9a8b82d91a4.serverhub.praktikum-services.ru/'
-
     GET_ORDER_ENDPOINT = 'api/v1/orders/track'
     CREATE_ORDER_ENDPOINT = 'api/v1/orders'
     CANCEl_ORDER_ENDPOINT = 'api/v1/orders/cancel'
-    GET_ORDER_FULL_URL = ''.join([SERVER_URL, GET_ORDER_ENDPOINT])
 
     CREATE_COURIER_ENDPOINT = 'api/v1/courier'
-    CREATE_COURIER_FULL_URL = ''.join([SERVER_URL, CREATE_COURIER_ENDPOINT])
+    DELETE_COURIER_ENDPOINT = 'api/v1/courier/'
 
 
 class Payloads:
@@ -42,13 +39,11 @@ class CourierLoginData:
         "password": "1234",
         "firstName": "frodo"
     }
-
     LOGIN_LENGTH_2 = {
         "login": "fr",
         "password": "1234",
         "firstName": "frodo"
     }
-
     LOGIN_LENGTH_1 = {
         "login": "f",
         "password": "1234",
