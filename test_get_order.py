@@ -8,7 +8,6 @@ class TestForOrderTracking:
 
     def test_get_order_by_existing_track_number(self, get_track_number, server_address):
         track_number = {'t': str(get_track_number)}
-        print(track_number)
         response = requests.get(''.join([server_address, Links.GET_ORDER_ENDPOINT]), params=track_number)
         assert response.status_code == 200
 

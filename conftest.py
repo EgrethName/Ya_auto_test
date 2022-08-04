@@ -25,6 +25,4 @@ def get_track_number(server_address):
 def delete_courier(server_address):
     yield
     for i in range(1, 50):
-        response = requests.delete(''.join([server_address, Links.DELETE_COURIER_ENDPOINT, str(i)]))
-    print('All couriers delete from db')
-
+        requests.delete(''.join([server_address, Links.DELETE_COURIER_ENDPOINT, str(i)]))
