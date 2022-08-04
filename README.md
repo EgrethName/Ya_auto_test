@@ -7,9 +7,9 @@
 
 
 ##### Установка виртуального окружения:
-`virtualenv venv
+```virtualenv venv
 source venv/bin/activate
-pip3 install -r requirements.txt`
+pip3 install -r requirements.txt```
 
 
 ##### Для запуска тестов необходимо передать адрес задеплоенного учебного сервера в консоли.
