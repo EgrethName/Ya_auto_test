@@ -10,7 +10,12 @@ def pytest_addoption(parser):   #  парсер аргументов из кон
 
 @pytest.fixture(scope="session")
 def server_address(request):
-    return request.config.getoption("--server_address")
+    address = request.config.getoption("--server_address")
+    if not address:
+        pytest.exit('Не передан адрес сервера')
+    return address
+
+
 
 
 @pytest.fixture(scope='class')
