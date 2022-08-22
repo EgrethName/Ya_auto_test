@@ -16,14 +16,14 @@ def server_address(request):
     return address
 
 
-
-
 @pytest.fixture(scope='class')
 def get_track_number(server_address):
     response = requests.post(''.join([server_address, Links.CREATE_ORDER_ENDPOINT]), json=Payloads.PAYLOAD_FOR_ORDER)
     response_json = response.json()
     track_number = response_json['track']
-    return track_number
+    yield track_number
+    track_request = {'track': str(track_number)}
+    requests.put(''.join([server_address, Links.CANCEl_ORDER_ENDPOINT]), params=track_request)
 
 
 @pytest.fixture(scope='session')
